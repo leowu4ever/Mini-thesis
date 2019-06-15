@@ -1,0 +1,22 @@
+\chapter{Introduction}
+\section{Aim}
+The market has great demand for affordable, easy-to-use devices that can be used indoors and outdoors for respiratory frequencies measurement. This research aims to develop a mobile application that utilises the acoustic respiration signals collected by a headset’s microphone to estimate the respiratory frequency and detect the respiratory phase. The application is designed to be capable of delivering reliable results indoors and outdoors in real time.
+
+\section{Motivation}
+In areas such as sports training monitoring and clinical monitoring, respiratory frequency is a significant indicator because it carries a lot of useful information about athletes' performance and potential diseases. It is also essential to identify the respiratory phase, which can help us analyse the user's breathing pattern, thus helping them to improve their breathing approaches and achieve the goal of improving their performance. The conventionally applied principles of estimating respiratory frequency mostly measure the airflow of breathing, the expansion of the chest wall and abdominal cavity, and the air temperature or humidity around the nose.\cite{Massaroni2019Contact-BasedRate} Most of the commercially available products are expensive and complicated, which is not suitable for daily-life usage. There have been many studies demonstrating that the acoustic signal of respiration contains enough features for the estimation of respiratory frequency and the detection of the respiratory phase.\cite{Hamke2019DetectingMachines} \cite{Kaur2017UseRespiration}\cite{Ren2015Fine-grainedSmartphones} It suggests a user-friendly, low-cost, and reliable solution to extract respiration-related information from respiration sound. 
+
+\section{Objectives}
+The gold standard device for measuring respiratory frequency is a mask for measuring the amount of lung respiration. This device covers a person's nose and mouth with a mask, and then measures the respiratory rate and respiration according to the air throughput in the mask. informational. However, our method requires placing the microphone between the mouth and the nose, and it is also surrounded by the mask. The respiratory acoustic signal collected by the microphone and the signal collected without the mask will be quite different, because the background noise is somewhat isolated by the mask. At the same time, the mask is not suitable for outdoor measurements. Therefore, we need a measurement tool that is also a comparison tool that does not cover the mouth and nose and can work outdoors. There are many such solutions on the market, such as vests that use the chest and abdomen to expand as they breathe. Although some work has verified the effectiveness of these products, their experiments are not objective enough. Therefore, the first objective is to 
+\begin{itemize}
+\item compare the difference in accuracy between the band and the mask in estimating respiratory frequency while running and standing still
+\end{itemize}
+
+To investigate the performance of the product when measuring different respiratory frequency, the second objective is 
+\begin{itemize}
+\item to compare the difference in accuracy between the band and the mask in estimating respiratory frequency while standing still and breathing at various frequencies
+\end{itemize}
+
+To investigate the feasibility of bringing a cost-friendly, intuitive and portable respiration monitoring solution. The last objective of this study is
+\begin{itemize}
+\item to design and develop a mobile-friendly combined solution of signal processing and machine learning that estimates the respiratory frequency and determine the breathing phase and breathing depth by utilising the acoustic respiration signal collected from headset’s microphone during running or resting.
+\end{itemize}

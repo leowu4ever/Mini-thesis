@@ -1,0 +1,66 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{authblk}
+\usepackage[block=ragged]{biblatex}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{breakcites}
+\usepackage[breaklinks=true]{hyperref}
+
+\graphicspath{ {./figures/} }
+\addbibresource{refs.bib}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\setlength{\emergencystretch}{10pt}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+ 
+        \Huge
+        \textbf{To Extract Respiration Information During Running and Resting with a Smartphone by Using the Acoustic Respiration Signal Collected from a Headset’s Microphone}
+ 
+        \LARGE
+        Mini Thesis for Probation Review
+ 
+        \vspace{0.5cm}
+
+        \textbf{Liqun Wu}
+
+        \Large
+        Supervised by Dr Caroline Li
+ 
+        \vfill
+ 
+        \vspace{0.8cm}
+ 
+        \includegraphics[width=0.4\textwidth]{figures/logo.jpg}
+ 
+        \Large
+        School of Computing\\
+        University of Kent\\
+        June 2019
+ 
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+\listoffigures
+
+\include{introduction}
+\include{review}
+\include{description}
+\include{evaluation}
+\include{summary}
+
+\addcontentsline{toc}{chapter}{Bibliography} 
+\printbibliography
+\end{document}

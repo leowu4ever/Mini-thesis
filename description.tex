@@ -1,0 +1,41 @@
+\chapter{Research Description}
+\section{Introduction}
+This research is to design and develop an innovative method to identify exhalation and inhalation based on the respiratory sound signal collected by the headset to achieve the purpose of estimating the respiratory rate. Algorithms using signal processing approaches and machine learning models that accomplish this goal will be implemented on mobile platforms, which solves the problem of breathing sound-based solutions that are susceptible to ambient noise and improve accuracy in quiet environments. The approaches used and some potential contribution are discussed in the following sections.
+
+\section{Approach}
+Signals obtained through masks and vests in a series of experiment will be used to compare accuracy and label the training data. Data obtained through the microphone is processed and then used to train the classifier. The working solution will be implemented on mobile platform with computational efficiency considered.
+
+\subsection{Experimental design}
+20 healthy males/females aged 18-45 will be recruited. Subjects with pulmonary, cardiovascular or metabolic disease, injuries and those unable to perform the required exercises will be excluded. Pregnant women will also be excluded. An informed, written consent form will be read, understood and signed by participants before any testing. 
+
+The purpose is to collect respiratory sound signals at different frequencies while standing still and running. The entire experiment will be carried out in the laboratory. The experiment includes two series.  In series 1, the subjects are required to wear a mask, a vest and a headset, while in series 2, the subject only needs to wear a vest and a headset. The device required will record data throughout the two series. The two series will carry out the same experimental steps as follows. There will be a 30 minutes gap between series 1 and series 2 for the subjects to rest.
+\begin{enumerate}
+\item Stand still and breathe naturally for five minutes.
+\item Warm up for 3 minutes on the treadmill at 8km/h.
+\item Increase the speed for male and female subjects to 10.8km/h and 9km/h and keep running for 3 minutes.
+\item Increase the speed for male and female subjects to 12.6km/h and 10.8km/h and keep running for 3 minutes.
+\item Increase the speed for male and female subjects to 14.4km/h and 12.6km/h and keep running for 3 minutes.
+\item Increase the speed for male and female subjects to 16.2km/h and 14.4km/h and keep running for 3 minutes.
+\item Stop running and rest on the treadmill for 10 minutes.
+\end{enumerate}
+
+\subsection{System architecture design}
+training phase
+prepare the segmentations of inhalation and exhalation from all signals, then put them to the pre-processing pipeline.Depending on the size of the dataset, might perform data augmentation on them in order to increase the size and variety of dataset
+
+Different features are then extracted based on the classification model chose, spectrograms img will be generated for CNN and spectral features like bandwidth will be compared for svn or random forest.
+
+classification
+create segmentation from realtime data with overlapping. convert to certain form and feed to the classifier.
+
+once we can identify the catagory of the breathing, we will just then calculation the respiratory rate accordinglys
+\section{Expected results}
+This study is expected to find the difference in accuracy between the band and the mask in measuring respiratory frequency while running and standing still, and in measuring respiratory frequency while standing still and breathing at various frequencies. Also, the signals collected from the commercially available product and the gold standard tool can be used as references to verify the validity of the developed application. The study plans to develop a mobile application that estimates the respiratory frequency and detects the respiratory phase and respiratory depth, by applying the signal processing and machine learning techniques to the acoustic respiration signals collected by the headset’s microphone. The application provides reliable results when the user is standing still and running, whether indoors or outdoors.
+\section{Potential contributions}
+it would suggest an algorithm with founded features that can sufficient in classifying the different catagory of respiratory sound. These anticipated findings can help us understand and design a user-friendly, low cost, and portable solution for daily monitoring of respiratory frequency. with a low barrier, respiration frequency measurment will become accessible to people for various purposes. 
+
+As mentioned previously, respiratory frequency reflects a lot of valuable information of althetes’ behaviour during training, especially physical effort which is recently discovered. The application developed in this research will also dramatically advance the existing form of sports training and help us better understand the performance of athletes. 
+
+Since respiratory frequency is a indication of various kinds of diease, the application is also expected to discover some potential health issues by providing continuous breathing monitoring in daily life. 
+
+Finally, it also evaluates the performance of the vest product during rest and running by comparing with the gold standeard tool.
