@@ -6,7 +6,7 @@ Partial work on exploring pre-processing techniques, useful features and classif
 The system architecture consists of three major parts as shown in Figure \ref{fig:system_architecture}. Data preparation and pre-processing are included in the first part. The pre-processed data is then passed to the second part of the system for feature extraction to obtain the essence of the signal. The last part of the system is responsible for two jobs, classification and estimation. The classifier discriminates the segmentation based on the feature extracted and then estimates the respiration related information such as respiratory phase and frequency. 
 
 \begin{figure}[h]
-    \centerline{\includegraphics[scale=0.5]{figures/system_architecture.png}}
+    \centerline{\includegraphics[scale=0.45]{figures/system_architecture.png}}
     \caption{system architecture}
     \label{fig:system_architecture}
 \end{figure}
@@ -18,9 +18,8 @@ Instead of developing the system on the mobile platform straight away, the exper
 There were also various Python libraries used in this experiment. Librosa is a Python library focused on audio signal processing, it implements most of the popular signal processing approaches and enables easy access to the common spectral features. PyHHT and PyWT were also used for the implementation of Hilbert Huang transform and wavelet transform, respectively. Lastly, Matplotlib is great for visualisation and plots exporting. The spectrograms generated were used as an input for the convolution neural networks.
 
 \section{Dataset preparation}
-Prior to receiving the approval for the ethics application, the mock dataset was initially collected and created from the author during a short running outdoors. The test data consist of 4 .wav audio files which were recorded in 22150Hz with the Ios application named Audio Memos using IPhone 6 and the microphone in the original earpods . The duration of the files varies from 23 to 59 seconds. 
+Prior to receiving the approval for the ethics application, the mock dataset was initially collected and created from the author during a short running outdoors. The test data consist of 4 .wav audio files which were recorded in 22050Hz with the Ios application named Audio Memos using IPhone 6 and the microphone in the original earpods . The duration of the files varies from 23 to 59 seconds. 
 
-\subsection{Labelling}
 The exhalation and inspiration segmentation contained in the audio file were manually labelled. However, the markers only represent when the exhalation and inhalation approximately begin. A more precised labelling could be obtained when having the referencing signal data from the actual data collection phase. An example of the test data with respiration phase labels is illustrated in Figure \ref{fig:audio_waveform}.
 
 \begin{figure}[h]
@@ -60,7 +59,7 @@ For the purposes of feature extraction and classification, the signal data is se
 It aims to find the features which make the inhalation and exhalation most separable so the classifier could take advantage of them. 
 
 \subsection{Spectral features}
-As shown in last section, FFT shows the frequency range contained in a signal. However, it can demonstrate very little information regarding the relationship between time and frequency. There are some other frequency domain-based analysing approaches that fulfil this need by generating spectrograms. 
+As illustrated in last section, FFT shows the frequency range contained in a signal. However, it can demonstrate very little information regarding the relationship between time and frequency. There are some other frequency domain-based analysing approaches that fulfil this need by generating spectrograms. 
 
 STFT is one of them. The idea behind short time Fourier transform is to apply fast Fourier transform on the signal with a sliding window of fixed length. The spetrogram is then converted to mel-sclaed spectrogram which has a better performance in modelling how humans percept low and high frequency. The comparison between STFT generated spectrogram and its mel-scaled spectrogram is shown in Figure \ref{fig:stft_mel-stft}. The mel-scaled spectrogram provides a more intuitive identification for exhalation than the original spectrogram. The red and yellow markers in the spectrogram represent when exhalation and inhalation begin. It clearly shows that most of the red markers perfectly align with one of the peak in the spectrogram. The red markers which do not associate with any peaks were also hard to distinguish through listening to the audio subjectivly. On the other hand, it is relatively impossible to recognise the inhalation through simply looking at the mel-scaled spectrogram.
 
@@ -78,16 +77,17 @@ However, STFT is not good for non-stationary signals. Also it has to balance the
 \end{figure}
 
 \subsection{Temporal features}
-Energy used for voiced-unvoiced segmentation discrimination to reduce computation cost
+Segmentation energy is the only temporal feature which has been implemented and evaluated so far. It helps to discriminate voiced and unvoiced segmentations. It could significantly reduce time spent in computation by disregarding the unvoiced segmentation in classification. The energy of the segmentation of a signal is shown in Figure \ref{fig:energy} This audio signal is 23s long containing 2678 segmentations. By setting energy threshold to the mean of the segmentation energy, only 309 segmentations were left still including most of around 90\% of the inhalation and exhalation segmentations. 
+Segmentation energy is an effective feature in screening voiced and unvoiced segmentation. 
 
-Training 
+\begin{figure}[h]
+    \centerline{\includegraphics[scale=0.35]{figures/energy.png}}
+    \caption{Energy of segmentations}
+    \label{fig:energy}
+\end{figure}
 
-Testing
-\subsection{Spectrogram generation}
-In order to generate training data for CNN, the spectrogram of the audio files which represent the segmentations of inhalation and exhalation will be generated and saved in coresponding folders on Google drive for easy access from Colaboratory. In total, there were 51 inhalation segmentations and 54 exhalation segmentation which were created from four respiration sound files. 20\% of the segmentation were randomly selected and then used as valid data.
-
-\subsubsection{Data augmentation}
-The purpose of data augmentation is to increase the variety of the dataset especially when the dataset is small. Unlikely 
+\section{Data respresentation}
+In order to generate training data for CNN, the spectrogram of the audio files which represent the segmentations of inhalation and exhalation will be generated and saved in coresponding folders on the Google drive for easy access from Colaboratory. In total, there were 51 inhalation segmentations and 54 exhalation segmentation which were created from four respiration sound files. 20\% of the segmentation were randomly selected and then used as test data.
 
 \section{Classification}
 To quickly investigate the feasibility of classifying respiration sound using audio files generated spectrograms, thrid-party deep learning library FastAI was selected for implementation. Instead of training a nerual network from scratch, resnet18 which is a variation of convolutional neural network was used for the purpose of transfer learning. 
@@ -109,4 +109,6 @@ structure
 
 \section{Estimation}
 
+phase
 
+respiratory frequency how to calculate

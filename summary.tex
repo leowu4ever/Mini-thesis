@@ -10,12 +10,18 @@ labelling where the in/out starts by aligning the audio signal with the referenc
 Conventional data augmentation includes scaling, stratching, cropping and etc. However, the data augmentation for audio-generated spectrogram image uses completely different mechanisims.
 
 \subsection{Signal pre-processing}
+segmentation size
+
 
 Hilbert huang transform
 
 explore different combination of signal processing approach
 
 \subsection{Feature extraction}
+Excepting  
+
+ddiscriminating the respiratory phase 
+
 LPC feature
 
 perceptual feature (Per)
@@ -26,7 +32,6 @@ perceptual and cepstral (PerCep) features
 
 enhanced hybrid perceptual and cepstral (PerCepD) features.
 
-energy
 spectural bandwidth
 spectral rolloff
 spectral centriod
@@ -35,6 +40,13 @@ spectral flatness
 spectral mfcc
 spectral mfcc delta
 spectral mfcc delta of delta
+
+\subsection{Data augmentation}
+The purpose of data augmentation is to increase the variety of the dataset especially when the dataset is small. Unlikely traditional image augmentation, cropping, zooming and scaling do not work well and even creating data with misleading labels. 
+
+Data augmentation has not yet been implemented in this work. However, some research has been done in exploring approaches creating additional data based on existing dataset.\cite{Cho2017DeepBreathSettings} \cite{Schluter2015ExploringNetworks}
+
+According to the study undertaken by Schluter and Grill, the most effective augmentation approach is pitch shifting. By also combining the time stretching and random frequency filtering, it could reduced the error signifcantly between 10 and 30\%.\cite{Schluter2015ExploringNetworks}
 
 \subsection{Classification}
 continue to use CNN when formal data is collected
