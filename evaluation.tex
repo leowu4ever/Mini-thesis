@@ -3,11 +3,11 @@
 Partial work on exploring pre-processing techniques, useful features and classifiers has been done before data is collected from real subjects. The tools and approaches applied for the current stage and the associated results are shown and evaluated as below.
 
 \section{System architecture}
-The system architecture consists of three major parts as shown in Figure \ref{fig:system_architecture}. Data preparation and pre-processing are included in the first part. The pre-processed data is then passed to the second part of the system for feature extraction to obtain the essence of the signal. The last part of the system is responsible for two jobs, classification and estimation. The classifier discriminates the segmentation based on the feature extracted and then estimates the respiration related information such as respiratory phase and frequency. 
+The system architecture consists of three major parts as shown in Fig. \ref{fig:system_architecture}. Data preparation and pre-processing are included in the first part. The pre-processed data is then passed to the second part of the system for feature extraction to obtain the essence of the signal. The last part of the system is responsible for two jobs, classification and estimation. The classifier discriminates the segmentation based on the feature extracted and then estimates the respiration related information such as respiratory phase and frequency. 
 
 \begin{figure}[h]
-    \centerline{\includegraphics[scale=0.45]{figures/system_architecture.png}}
-    \caption{system architecture}
+    \centerline{\includegraphics[scale=0.55]{figures/system_architecture.png}}
+    \caption{A diagram of the system architecture}
     \label{fig:system_architecture}
 \end{figure}
 
@@ -18,34 +18,34 @@ Instead of developing the system on the mobile platform straight away, the exper
 There were also various Python libraries used in this experiment. Librosa is a Python library focused on audio signal processing, it implements most of the popular signal processing approaches and enables easy access to the common spectral features. PyHHT and PyWT were also used for the implementation of Hilbert Huang transform and wavelet transform, respectively. Lastly, Matplotlib is great for visualisation and plots exporting. The spectrograms generated were used as an input for the convolution neural networks.
 
 \section{Dataset preparation}
-Prior to receiving the approval for the ethics application, the mock dataset was initially collected and created from the author during a short running outdoors. The test data consist of 4 .wav audio files which were recorded in 22050Hz with the Ios application named Audio Memos using IPhone 6 and the microphone in the original earpods . The duration of the files varies from 23 to 59 seconds. 
+Prior to receiving the approval for the ethics application, the mock dataset was initially collected and created from the author during a short running outdoors. The test data consist of 4 .wav audio files which were recorded in 22050Hz with the Ios application named Audio Memos using IPhone 6 and the microphone in the original earpods. The duration of the files varies from 23 to 59 seconds.
 
-The exhalation and inspiration segmentation contained in the audio file were manually labelled. However, the markers only represent when the exhalation and inhalation approximately begin. A more precised labelling could be obtained when having the referencing signal data from the actual data collection phase. An example of the test data with respiration phase labels is illustrated in Figure \ref{fig:audio_waveform}.
+The exhalation and inspiration segmentation contained in the audio file were manually labelled. However, the markers only represent when the exhalation and inhalation approximately begin. A more precised labelling could be obtained when having the referencing signal data from the actual data collection phase. An example of the test data with respiration phase labels is illustrated in Fig. \ref{fig:audio_waveform}.
 
 \begin{figure}[h]
     \centerline{\includegraphics[scale=0.35]{figures/audio_waveform.png}}
-    \caption{Audio signal with inhalation starting at yellow markers and exhalation starting at red markers }
+    \caption{An illustration of a respiratory sound signal with manual labelling. Inhalation starts at yellow markers. Exhalation starts at red markers.}
     \label{fig:audio_waveform}
 \end{figure}
 
 \clearpage
-\section{Pre-processing techniques}
-The complete pre-processing pipieline consist of 4 steps which were inspired by these studies.\cite{Lei2014Content-basedFeatures}\cite{Niu2019AState}\cite{Ren2015Fine-grainedSmartphones} The completed results after applying the full pre-processing techniques is shown in Figure \ref{fig:fft_pipeline}.
+\section{Signal processing methods}
+The complete pre-processing pipieline consist of 4 steps which were inspired by these studies.\cite{Lei2014Content-basedFeatures}\cite{Niu2019AState}\cite{Ren2015Fine-grainedSmartphones} The completed results after applying the full pre-processing techniques is shown in Fig. \ref{fig:fft_pipeline}.
 \begin{figure}[h]
-    \centerline{\includegraphics[scale=0.25]{figures/fft_pipeline.png}}
-    \caption{The results of applying the full pre-processing techniques}
+    \centerline{\includegraphics[scale=0.33]{figures/fft_pipeline.png}}
+    \caption{The results of applying the complete signal processing methods.}
     \label{fig:fft_pipeline}
 \end{figure}
 
 \subsection{Band-pass filter}
-The audio files was firstly passed into a band-pass filter which retained the signal with the frequency between 50Hz and 4000Hz. The frequencies that contained in these signals were also examined by applying fast Fourier transform as shown in . According to Figure \ref{fig:fft}, it was clearly shown that the major frequency range was 0-1000Hz.
+The audio files was firstly passed into a band-pass filter which retained the signal with the frequency between 50Hz and 4000Hz. The frequencies that contained in these signals were also examined by applying fast Fourier transform as shown in . According to Fig. \ref{fig:fft}, it was clearly shown that the major frequency range was 0-1000Hz.
 
 \begin{figure}[h]
-    \centerline{\includegraphics[scale=0.25]{figures/fft.png}}
-    \caption{Frequency components of the 4 audio signals}
+    \centerline{\includegraphics[scale=0.33]{figures/fft.png}}
+    \caption{Frequency components of four respiratory sound signals decomposed using Fast Fourier Transform}
     \label{fig:fft}
 \end{figure}
-\subsection{Emphasising}
+\subsection{Emphasis filter}
 To overcome the radiation effects caused mostly by the lips, the signals were applied with a pre-emphasised filter to increase the amplitude of the components in high frequency range. The emphasising was completed by following the convertion below.
 
 EQUATION HERE
@@ -64,51 +64,50 @@ As illustrated in last section, FFT shows the frequency range contained in a sig
 STFT is one of them. The idea behind short time Fourier transform is to apply fast Fourier transform on the signal with a sliding window of fixed length. The spetrogram is then converted to mel-sclaed spectrogram which has a better performance in modelling how humans percept low and high frequency. The comparison between STFT generated spectrogram and its mel-scaled spectrogram is shown in Figure \ref{fig:stft_mel-stft}. The mel-scaled spectrogram provides a more intuitive identification for exhalation than the original spectrogram. The red and yellow markers in the spectrogram represent when exhalation and inhalation begin. It clearly shows that most of the red markers perfectly align with one of the peak in the spectrogram. The red markers which do not associate with any peaks were also hard to distinguish through listening to the audio subjectivly. On the other hand, it is relatively impossible to recognise the inhalation through simply looking at the mel-scaled spectrogram.
 
 \begin{figure}[h]
-    \centerline{\includegraphics[scale=0.6]{figures/stft_mel-stft.png}}
-    \caption{stft vs mel-stft}
+    \centerline{\includegraphics[scale=0.62]{figures/stft_mel-stft.png}}
+    \caption{The spectrograms obtained from using STFT (top plot) and mel-scaled STFT (bottom plot). Inhalation starts at yellow markers. Exhalation starts at red markers.}
     \label{fig:stft_mel-stft}
 \end{figure}
 
-However, STFT is not good for non-stationary signals. Also it has to balance the trade off between the time resolution and frequency resolution. Continuous wavelet transform is a solution to model the relationship between time and frequency of a non-stationary signal. Continuous wavelets transform is a great solution for transient signals since it has good resolution in time and poor resolution in frequency at high frequency. It would be helpful to capture the transients features by adopting continuous wavelet transform. Different wavelet functions influence the results of spectrogram generation. There were three kinds (Gaus, Mexh and Morl) of continuous wavelet function experimented and the results are shown in Figure \ref{fig:wavelet_functions}. It is fairly difficult to identify which wavelet function gives a better result in presenting the signal.
+However, STFT is not good for non-stationary signals. Also it has to balance the trade off between the time resolution and frequency resolution. Continuous wavelet transform is a solution to model the relationship between time and frequency of a non-stationary signal. Continuous wavelets transform is a great solution for transient signals since it has good resolution in time and poor resolution in frequency at high frequency. It would be helpful to capture the transients features by adopting continuous wavelet transform. Different wavelet functions influence the results of spectrogram generation. There were three kinds (Gaus, Mexh and Morl) of continuous wavelet function experimented and the results are shown in Fig. \ref{fig:wavelet_functions}. It is fairly difficult to identify which wavelet function gives a better result in presenting the signal.
 \begin{figure}[h]
-    \centerline{\includegraphics[scale=0.25]{figures/wavelet_trans_wav_func.png}}
-    \caption{Applying different wavelet functions}
+    \centerline{\includegraphics[scale=0.45]{figures/wavelet_trans_wav_func.png}}
+    \caption{The result of applying different wavelet functions to a respiratory sound signal}
     \label{fig:wavelet_functions}
 \end{figure}
 
+\clearpage
 \subsection{Temporal features}
-Segmentation energy is the only temporal feature which has been implemented and evaluated so far. It helps to discriminate voiced and unvoiced segmentations. It could significantly reduce time spent in computation by disregarding the unvoiced segmentation in classification. The energy of the segmentation of a signal is shown in Figure \ref{fig:energy} This audio signal is 23s long containing 2678 segmentations. By setting energy threshold to the mean of the segmentation energy, only 309 segmentations were left still including most of around 90\% of the inhalation and exhalation segmentations. 
+Segmentation energy is the only temporal feature which has been implemented and evaluated so far. It helps sto discriminate voiced and unvoiced segmentations. It could significantly reduce time spent in computation by disregarding the unvoiced segmentation in classification. The energy of the segmentation of a signal is shown in Fig. \ref{fig:energy} This audio signal is 23s long containing 2678 segmentations. By setting energy threshold to the mean of the segmentation energy, only 309 segmentations were left still including most of around 90\% of the inhalation and exhalation segmentations. 
 Segmentation energy is an effective feature in screening voiced and unvoiced segmentation. 
+
+Equation here
 
 \begin{figure}[h]
     \centerline{\includegraphics[scale=0.35]{figures/energy.png}}
-    \caption{Energy of segmentations}
+    \caption{The blue line on the top plot represents the segmentation energy for all segmentations of a respiratory sound signal. The navy colour markers on the bottom plot correspond to the segmentations having higher energy than the energy threshold.}
     \label{fig:energy}
 \end{figure}
 
 \section{Data respresentation}
-In order to generate training data for CNN, the spectrogram of the audio files which represent the segmentations of inhalation and exhalation will be generated and saved in coresponding folders on the Google drive for easy access from Colaboratory. In total, there were 51 inhalation segmentations and 54 exhalation segmentation which were created from four respiration sound files. 20\% of the segmentation were randomly selected and then used as test data.
+In order to generate training data for CNN, the spectrogram of the audio files which represent the segmentations of inhalation and exhalation will be generated and saved in coresponding folders on the Google drive for easy access from Colaboratory. In total, there were 51 inhalation segmentations and 54 exhalation segmentation which were created from four respiration sound files. 20\% of the segmentation were randomly selected and then used as valid data. Partial dataset is shown in Fig. \ref{fig:dataset}
+
+\begin{figure}[h]
+    \centerline{\includegraphics[scale=0.8]{figures/dataset.png}}
+    \caption{Partial dataset (Spectrograms titled as 'in' represents an inhalation data. Spectrograms titled as 'out' represents an exhalation data.}
+    \label{fig:dataset}
+\end{figure}
 
 \section{Classification}
-To quickly investigate the feasibility of classifying respiration sound using audio files generated spectrograms, thrid-party deep learning library FastAI was selected for implementation. Instead of training a nerual network from scratch, resnet18 which is a variation of convolutional neural network was used for the purpose of transfer learning. 
+Being able to correctly discriminate the sound of inhalation and exhalation is the foundation of providing respiration-related information such respiratory phase and depth. To quickly explore the feasibility of classifying respiration sound using audio files generated spectrograms, FastAI was selected for implementation. FastAI is a high-level deep learning framework enables fast and easy process in deep learning model training and analysing. 
+
+Transfer learning allows taking advantage of past experience from previous training. FastAi provides pre-trained models for transfer learning without developing and training a nerual network from scratch. Resnet34 is a variation of convolutional neural network was used in this phase. \cite{He2016DeepRecognition}
+
+The performance of the training phase was evaluated through three characteristics training loss, valid loss and acciracy. The model was trained for 10 epochs and the final accuracy achieved over the validation dataset was 66\%. Even the loss on the training dataset decreased over the epochs but it was significantly higher than the loss on the validation dataset. It was likely to be a sign of underfitting which suggested that the model didn't learn enough characteristics for classification from the dataset prepared. It might also imply that the classification model is not ideal for respiration data. However, the classification results were obatined without fine-tunning. Approaches used to improve classifier's performance is described in the next chapter. 
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.6]{figures/classification_results.png}
-    \caption{Classification results}
+    \caption{Results after ten epochs training.}
     \label{fig:classification_results}
 \end{figure}
-
-Why the rate is low
-
-pre-processing approach filtered out some wanted frequency components
-
-dataset too small
-
-structure
-
-\section{Estimation}
-
-phase
-
-respiratory frequency how to calculate
