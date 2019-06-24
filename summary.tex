@@ -11,7 +11,9 @@ The classifier's performance was likely affected by the inaccurate and uncomplet
 The purpose of data augmentation is to increase the variety of the dataset especially when the dataset is small. Conventional data augmentation methods includes applying scaling, stratching, cropping on the original images. However, the data augmentation for audio-generated spectrogram image follows different methodologies. Data augmentation has not yet been implemented in this work. However, some research has been done in exploring approaches creating additional data based on existing dataset.\cite{Cho2017DeepBreathSettings} \cite{Schluter2015ExploringNetworks} According to the study undertaken by Schluter and Grill, the most effective augmentation approach is pitch shifting. By also combining the time stretching and random frequency filtering, it could reduced the error signifcantly between 10 and 30\%.\cite{Schluter2015ExploringNetworks}
 
 \subsection{Signal processing}
-new signal processing methods like Hilbert huang transform
+new signal processing methods like 
+
+Hilbert huang transform full data driven unsupervised
 
 A results-driven methodology will be applied by evaluating the classification results from different combination of signal processing 
 
@@ -24,6 +26,11 @@ Apart from classifying the respiratory sound based on audio-generated spectrogra
 The classifier experimented has show a great potential in discriminating respiratory sound. It is planed to continue to use Resnet34 when formal data is collected at the next phase. More work will be carried on experimenting different hyper-parameters such as learning rate, number of layers and so on to solve the issue of under-fitting at present.
 
 As mentioned above, this study also aims to experiment with other machine learning models for performance comparison, such random forest and support vector machine. 
+
+Try training for long iterations.
+
+
+stops at some point
 
 \subsection{Estimation}
 Respiratory frequency is defined as 60/(time interval between current and previous breath (seconds) (5.1))\cite{Mason2002SignalMonitoring}
