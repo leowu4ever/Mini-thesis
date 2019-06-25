@@ -1,16 +1,22 @@
 \chapter{Research Description}
 \section{Introduction}
-This research is to design and develop an innovative method to identify exhalation and inhalation based on the respiratory sound signal collected by the headset to achieve the purpose of estimating the respiratory rate. Algorithms using signal processing approaches and machine learning models that accomplish this goal will be implemented on mobile platforms, which solves the problem of breathing sound-based solutions that are susceptible to ambient noise and improve accuracy in quiet environments. The approaches used and some potential contribution are discussed in the following sections.
+The ultimate goal of this research is to develop a mobile application to estimate respiratory frequency based on the respiratory sound signal collected from a headset's microphone. Various signal processing methods and machine learning models will be experimented to achieve the objectives. The approaches designed and some potential contribution are discussed in the following sections.
 
-\section{Approach}
-Signals obtained through masks and vests in a series of experiment will be used to compare accuracy and label the training data. Data obtained through the microphone is processed and then used to train the classifier. The working solution will be implemented on mobile platform with computational efficiency considered.
+\section{Approaches}
+To provide the estimation in respiratory frequency, it is fundamentally necessary to be able to discriminate inhalation sound and exhalation sound from the breathing sound collected. Once it is capable of identifying the category of the breathing sound,  respiratory rate can be calculated accordingly. Fine respiratory information, such as respiratory depth and respiratory phase can also be provided.
 
-Two main kind of classification method will be tested . Classification with machine learning model and hand-crafted features. Classification in CNN with spectrograms.
+It is getting more and more popular to classify audio clips based on the spectrograms generated using convolutional neural networks. Instead of hand-crafting features, convolutional neural networks are expected to find useful features automatically during training with no supervision required. Also there have been many pre-trained models available for the purpose of transfer learning. Therefore, various convolutional neural networks are going to be modified and experimented. In order to generate spectrograms that capture valuable features, a number of pre-processing and frequency-time based signal processing methods will be tested in order to improve the performance of the classifiers. Apart from exploring the performance of convolutional neural networks, other machine learning models like Support Vector Machine and Random Forest are of interest. various temporal and spectral features will be evaluated in this approach. 
+
+The working solution will finally be implemented for mobile platform with computational efficiency considered. Since the computational resources in mobile platform are restricted, It is expected to make adjustments to balance the performance for real life using.
 
 \subsection{Experimental design}
+
+\subsubsection{Participants and eligibility criteria}
 20 healthy males/females aged 18-45 will be recruited. Subjects with pulmonary, cardiovascular or metabolic disease, injuries and those unable to perform the required exercises will be excluded. Pregnant women will also be excluded. An informed, written consent form will be read, understood and signed by participants before any testing. 
 
-The purpose is to collect respiratory sound signals at different frequencies while standing still and running. The entire experiment will be carried out in the laboratory. The experiment includes two series.  In series 1, the subjects are required to wear a mask, a vest and a headset, while in series 2, the subject only needs to wear a vest and a headset. The device required will record data throughout the two series. The two series will carry out the same experimental steps as follows. There will be a 30 minutes gap between series 1 and series 2 for the subjects to rest.
+\subsection{Experimental series}
+The purpose is to collect respiratory sound signals at different frequencies while standing still and running. The entire experiment will be carried out in the laboratory. The experiment includes two series. The subjects are required to perform Series 1 with COSMED Squark b2, Equivital TnR suite and a headset. While only Equivital TnR suite and a headset are required for the subjects in Series 2. The device required will record data throughout the two series. The two series will carry out the same experimental steps as follows. There will be a 30 minutes gap between series 1 and series 2 for the subjects to rest.
+
 \begin{enumerate}
 \item Stand still and breathe naturally for five minutes.
 \item Warm up for 3 minutes on the treadmill at 8km/h.
@@ -21,23 +27,10 @@ The purpose is to collect respiratory sound signals at different frequencies whi
 \item Stop running and rest on the treadmill for 10 minutes.
 \end{enumerate}
 
-\subsection{System architecture design}
-training phase
-prepare the segmentations of inhalation and exhalation from all signals, then put them to the pre-processing pipeline.Depending on the size of the dataset, might perform data augmentation on them in order to increase the size and variety of dataset
-
-Different features are then extracted based on the classification model chose, spectrograms img will be generated for CNN and spectral features like bandwidth will be compared for svn or random forest.
-
-classification
-create segmentation from realtime data with overlapping. convert to certain form and feed to the classifier.
-
-once we can identify the catagory of the breathing, we will just then calculation the respiratory rate accordinglys
 \section{Expected results}
-This study is expected to find the difference in accuracy between the band and the mask in measuring respiratory frequency while running and standing still, and in measuring respiratory frequency while standing still and breathing at various frequencies. Also, the signals collected from the commercially available product and the gold standard tool can be used as references to verify the validity of the developed application. The study plans to develop a mobile application that estimates the respiratory frequency and detects the respiratory phase and respiratory depth, by applying the signal processing and machine learning techniques to the acoustic respiration signals collected by the headset’s microphone. The application provides reliable results when the user is standing still and running, whether indoors or outdoors.
+This study is expected to find the difference in accuracy between Equivital TnR suite and COSMED Squark b2 in measuring respiratory frequency while running and standing still, and in measuring respiratory frequency while standing still and breathing at various frequencies. Also, the signals collected from the commercially available product and the gold standard tool can be used as references to verify the validity of the developed application. The study plans to develop a mobile application that estimates the respiratory frequency and detects the respiratory phase and respiratory depth, by applying the signal processing and machine learning techniques to the acoustic respiration signals collected by the headset’s microphone. The application provides reliable results when the user is standing still and running, whether indoors or outdoors.
+
 \section{Potential contributions}
-it would suggest an algorithm with founded features that can sufficient in classifying the different catagory of respiratory sound. These anticipated findings can help us understand and design a user-friendly, low cost, and portable solution for daily monitoring of respiratory frequency. with a low barrier, respiration frequency measurment will become accessible to people for various purposes. 
+This study will propose an algorithm with founded features that is sufficient in classifying the different categories of respiratory sound. These anticipated findings can help us understand and design a user-friendly, low cost, and portable solution for daily monitoring of respiratory frequency. Respiration frequency monitoring will become accessible to more people for various purposes. 
 
-As mentioned previously, respiratory frequency reflects a lot of valuable information of althetes’ behaviour during training, especially physical effort which is recently discovered. The application developed in this research will also dramatically advance the existing form of sports training and help us better understand the performance of athletes. 
-
-Since respiratory frequency is a indication of various kinds of diease, the application is also expected to discover some potential health issues by providing continuous breathing monitoring in daily life. 
-
-Finally, it also evaluates the performance of the vest product during rest and running by comparing with the gold standeard tool.
+As mentioned previously, respiratory frequency reflects a lot of valuable information of athletes’ behaviour during training, especially physical effort which is just recently discovered. The application developed in this research will also dramatically advance the existing form of sports training and help us better understand the performance of athletes. Since respiratory frequency is a indication of various kinds of diseases, the application is also expected to discover some potential health issues by providing continuous breathing monitoring in daily life. 
